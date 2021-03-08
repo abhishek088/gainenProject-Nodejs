@@ -36,9 +36,14 @@ app.use(session({
 //setup model for users
 const User = mongoose.model('User', {
     username: String,
-    password: String
+    password: String,
+    firstName: String,
+    lastName: String,
+    emailId: String,
+    phone: String
 });
 
+//for refernce
 //home page
 // app.get('/', function(req, res){
 //     res.send('Hello world!');
@@ -64,8 +69,54 @@ app.post('/', function(req, res){
         });
 });
 
+//user profile get and post
 app.get('/userprofile', function(req, res){
+    // User.find({username: username}).exec(function(err, users){
+    //     console.log(err);
+    //     res.render('userprofile', {users: users});
+    // });
+
+
+    //needs fix
+    
     res.render('userprofile');
+});
+
+app.post('/userprofile', function(req, res){
+    res.render('userprofile');
+});
+
+//register get and post
+app.get('/register', function(req, res){
+    res.render('register');
+});
+
+app.post('/register', function(req, res){
+    var username = req.body.username;
+    var password = req.body.password;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var emailId = req.body.emailId;
+    var phone = req.body.phone;
+
+    var registerData = {
+        username: username,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        emailId: emailId,
+        phone: phone
+    }
+
+    //store user
+    var newUser = new User(registerData);
+
+    //save user
+    newUser.save().then(function(){
+        console.log('new user saved');
+    });
+
+    res.render('register', registerData);
 });
 
 //listen to port
