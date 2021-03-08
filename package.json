@@ -1,0 +1,19 @@
+{
+  "name": "gainen-capstone",
+  "version": "1.0.0",
+  "description": "capstone project - CAD",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ejs": "*",
+    "body-parser": "*",
+    "mongoose": "*",
+    "express-session": "1.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abhishek,stephen",
+  "license": "ISC"
+}
