@@ -24,17 +24,28 @@
         </ul>
       </div>
   </nav>
-    <h2>User Profile</h2>
+    <h2>Post Idea</h2>
   </header>
   
   <main>
-    Success ! Welcome <%= firstName %> !<br>
-    
-    Username: <%= username %><br>
-    First Name: <%= firstName %><br>
-    Last Name: <%= lastName %><br>
-    Email Id: <%= emailId %><br>
-    Phone Number: <%= phone %><br>
+    <form name="postIdea" action="" method="post">
+
+    <div class="container">
+        <label for="title"><b>Title</b></label>
+        <input type="text" placeholder="Enter title" name="title" required><br>
+
+        <label for="idea"><b>Idea</b></label>
+        <textarea placeholder="Enter idea" rows="10" cols="100" name="idea" required></textarea><br>
+
+        <input type="radio" id="public" name="isPublic" value="public">
+        <label for="public"><b>Public</b></label>
+
+        <input type="radio" id="private" name="isPublic" value="private">
+        <label for="private"><b>Private</b></label>
+                  
+        <button type="submit">Submit Idea</button>
+    </div>
+    </form>
   </main>
 </body>
 

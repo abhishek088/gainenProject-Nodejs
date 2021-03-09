@@ -24,17 +24,21 @@
         </ul>
       </div>
   </nav>
-    <h2>User Profile</h2>
+    <h2>Public Idea</h2>
   </header>
   
   <main>
-    Success ! Welcome <%= firstName %> !<br>
-    
-    Username: <%= username %><br>
-    First Name: <%= firstName %><br>
-    Last Name: <%= lastName %><br>
-    Email Id: <%= emailId %><br>
-    Phone Number: <%= phone %><br>
+    <% for(var idea of ideas){ 
+          if(idea.isPostOnPublic == true){
+    %>
+        <h3><%= idea.username %></h3>
+        <h4><%= idea.title %></h4>
+        <p><%= idea.idea %></p>
+
+    <%
+          }
+        }
+    %>
   </main>
 </body>
 
