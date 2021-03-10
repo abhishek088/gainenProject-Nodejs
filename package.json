@@ -15,5 +15,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "abhishek,stephen",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek088/gainenProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abhishek088/gainenProject/issues"
+  },
+  "homepage": "https://github.com/abhishek088/gainenProject#readme"
 }
