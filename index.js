@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
 const mongoose = require('mongoose');
 
@@ -10,6 +11,7 @@ const path = require('path');
 //global variables
 const app = express();
 app.use(bodyParser.urlencoded( { extended:false } ));
+app.use(fileUpload());
 
 //setup the path to public folders and views
 app.set('views', path.join(__dirname, 'views')); //relative path
@@ -40,7 +42,8 @@ const User = mongoose.model('User', {
     firstName: String,
     lastName: String,
     emailId: String,
-    phone: String
+    phone: String,
+    profilePicName: String
 });
 
 const Idea = mongoose.model('Idea', {
@@ -103,7 +106,8 @@ app.get('/userprofile', function(req, res){
                 firstName: user.firstName,
                 lastName: user.lastName,
                 emailId: user.firstName,
-                phone: user.phone
+                phone: user.phone,
+                profilePicName: user.profilePicName
             });
         });
     }
@@ -164,6 +168,14 @@ app.post('/register', function(req, res){
     var lastName = req.body.lastName;
     var emailId = req.body.emailId;
     var phone = req.body.phone;
+    var profilePicName = req.files.profilePic.name;
+    var profilePic = req.files.profilePic;
+
+    var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
+    profilePic.mv(profilePicPath, function(err) { // move image to local folder
+        console.log(err);
+    });
+
 
     var registerData = {
         username: username,
@@ -171,7 +183,8 @@ app.post('/register', function(req, res){
         firstName: firstName,
         lastName: lastName,
         emailId: emailId,
-        phone: phone
+        phone: phone,
+        profilePicName: profilePicName
     }
 
     //store user
@@ -243,6 +256,70 @@ app.post('/publicIdea', function(req, res){
     //dosomething
 });
 
+
+//edit profile get and post
+app.get('/editProfile', function(req, res){
+    if(req.session.userLoggedIn){
+        User.findOne({username: req.session.username}).exec(function(err, user){
+            console.log(err)
+            res.render('editProfile', {
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.firstName,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            });
+        });
+    }
+    else{
+        res.redirect('/login');
+    }
+});
+
+app.post('/editProfile', function(req, res){
+    var password = req.body.password;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var emailId = req.body.emailId;
+    var phone = req.body.phone;
+    var profilePicName = req.files.profilePic.name;
+    var profilePic = req.files.profilePic;
+
+    var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
+    profilePic.mv(profilePicPath, function(err) { // move image to local folder
+        console.log(err);
+    });
+
+    if(req.session.userLoggedIn){
+        User.findOne({username: req.session.username}).exec(function(err, user){
+            console.log(err)
+            user.password = password;
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.emailId = emailId;
+            user.phone = phone;
+            user.profilePicName = profilePicName;
+            user.save();  
+
+            var editUserData = {
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.emailId,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            }   
+            res.redirect('userprofile');
+        });
+        
+    }
+    else{
+        res.redirect('/login');
+    }
+});
 
 //listen to port
 app.listen(8080);
