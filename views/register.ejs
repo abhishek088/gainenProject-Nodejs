@@ -41,8 +41,13 @@
 
     <label for="profilePic"><b>Profile Picture</b></label>
     <input type="file" placeholder="Insert your picture" name="profilePic" id="profilePic" required><br>
+
+    <% if(typeof error !== 'undefined'){ %>
+      <%= error %>
+    <% } %>
         
     <button type="submit">Register</button>
+
   </div>
 
   </form>

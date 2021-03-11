@@ -176,26 +176,37 @@ app.post('/register', function(req, res){
         console.log(err);
     });
 
-
-    var registerData = {
-        username: username,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        emailId: emailId,
-        phone: phone,
-        profilePicName: profilePicName
-    }
-
-    //store user
-    var newUser = new User(registerData);
-
-    //save user
-    newUser.save().then(function(){
-        console.log('new user saved');
+    User.findOne({username: username}).exec(function(err, user){
+        console.log(err);
+        
+        if(user){
+            res.render('register', {
+                error: 'Username already exists. Please use a different username'
+            });
+        }
+        else{
+            var registerData = {
+                username: username,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                emailId: emailId,
+                phone: phone,
+                profilePicName: profilePicName
+            }
+        
+            //store user
+            var newUser = new User(registerData);
+        
+            //save user
+            newUser.save().then(function(){
+                console.log('new user saved');
+            });
+        
+            res.render('register', registerData);
+        }
     });
-
-    res.render('register', registerData);
+    
 });
 
 //post idea get  and post
@@ -302,16 +313,7 @@ app.post('/editProfile', function(req, res){
             user.phone = phone;
             user.profilePicName = profilePicName;
             user.save();  
-
-            var editUserData = {
-                username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                emailId: user.emailId,
-                phone: user.phone,
-                profilePicName: user.profilePicName
-            }   
+ 
             res.redirect('userprofile');
         });
         
@@ -320,6 +322,9 @@ app.post('/editProfile', function(req, res){
         res.redirect('/login');
     }
 });
+
+//delete profile get and post
+
 
 //listen to port
 app.listen(8000);
