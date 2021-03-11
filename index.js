@@ -50,10 +50,11 @@ const Idea = mongoose.model('Idea', {
     title: String,
     idea: String,
     username: String,
-    isPostOnPublic: Boolean
+    isPostOnPublic: Boolean,
+    ideaDate: Date
 });
 
-//for refernce
+//for reference
 // app.get('/', function(req, res){
 //     res.send('Hello world!');
 // });
@@ -120,7 +121,7 @@ app.post('/userprofile', function(req, res){
     res.render('userprofile');
 }); //post method not needed till edit action is created
 
-//logout get
+//logout get and post
 app.get('/logout', function(req, res) {
     req.session.username = ''; 
     req.session.userLoggedIn = false; 
@@ -221,6 +222,7 @@ app.post('/postIdea', function(req, res){
     var title = req.body.title;
     var idea = req.body.idea;
     var isPublic = req.body.isPublic;
+    var ideaDate = Date.now();
 
     if(req.session.userLoggedIn){
         User.findOne({username: req.session.username}).exec(function(err, user){
@@ -235,7 +237,8 @@ app.post('/postIdea', function(req, res){
                 title: title,
                 idea: idea,
                 username: user.username,
-                isPostOnPublic: isPostOnPublic
+                isPostOnPublic: isPostOnPublic,
+                ideaDate: ideaDate
             }
         
             //store user
@@ -246,7 +249,8 @@ app.post('/postIdea', function(req, res){
                 console.log('new idea saved');
             });
         
-            res.render('postIdea', ideaData);
+            //res.render('postIdea', ideaData);
+            res.redirect('/publicIdea');
         });
     }
     // else{
@@ -327,5 +331,5 @@ app.post('/editProfile', function(req, res){
 
 
 //listen to port
-app.listen(8000);
-console.log(`server is running on port 8000`);
+app.listen(8080);
+console.log(`server is running on port 8080`);

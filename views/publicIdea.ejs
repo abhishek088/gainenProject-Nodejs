@@ -28,16 +28,17 @@
   </header>
   
   <main>
-    <% for(var idea of ideas){ 
-          if(idea.isPostOnPublic == true){
+    <% ideas.reverse().forEach(function(ideas){ 
+          if(ideas.isPostOnPublic == true){
     %>
-        <h3><%= idea.username %></h3>
-        <h4><%= idea.title %></h4>
-        <p><%= idea.idea %></p>
+        <h3><%= ideas.username %></h3>
+        <h4><%= ideas.title %></h4>
+        <p><%= ideas.ideaDate %></p>
+        <p><%= ideas.idea %></p>
 
     <%
           }
-        }
+        });
     %>
   </main>
 </body>
