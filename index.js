@@ -328,7 +328,32 @@ app.post('/editProfile', function(req, res){
 });
 
 //delete profile get and post
+app.get('/deleteProfile', function(req, res){
+    if(req.session.userLoggedIn){
+        User.findOne({username: req.session.username}).exec(function(err, user){
+            console.log(err)
+            res.render('deleteProfile', {
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.firstName,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            });
+        });
+    }
+    else{
+        res.redirect('/login');
+    }
+});
+app.post('/deleteProfile', function(req, res){
+    if(req.session.userLoggedIn){
+        User.findOneAndDelete({username: req.session.username}).exec(function(){
 
+            res.redirect('/');
+        });
+    }
+});
 
 //listen to port
 app.listen(8080);
