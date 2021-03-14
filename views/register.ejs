@@ -40,11 +40,14 @@
     <input type="text" placeholder="Enter Phone Number" name="phone" required><br>
 
     <label for="profilePic"><b>Profile Picture</b></label>
-    <input type="file" placeholder="Insert your picture" name="profilePic" id="profilePic" required><br>
+    <input type="file" placeholder="Insert your picture" name="profilePic" id="profilePic"><br>
 
-    <% if(typeof error !== 'undefined'){ %>
-      <%= error %>
-    <% } %>
+    <p>
+      <% if(typeof error !== 'undefined'){ %>
+        <%= error %>
+      <% } %>
+    </p>
+    
         
     <button type="submit">Register</button>
 

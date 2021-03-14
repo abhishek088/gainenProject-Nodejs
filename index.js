@@ -101,14 +101,17 @@ app.post('/login', function(req, res){
 app.get('/userprofile', function(req, res){
     if(req.session.userLoggedIn){
         User.findOne({username: req.session.username}).exec(function(err, user){
-            console.log(err)
-            res.render('userprofile', {
-                username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                emailId: user.firstName,
-                phone: user.phone,
-                profilePicName: user.profilePicName
+            Idea.find({username: req.session.username}).exec(function(err, ideas){
+                console.log(err);
+                res.render('userprofile', {
+                    username: user.username,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    emailId: user.firstName,
+                    phone: user.phone,
+                    profilePicName: user.profilePicName,
+                    ideas: ideas
+                });
             });
         });
     }
@@ -169,9 +172,11 @@ app.post('/register', function(req, res){
     var lastName = req.body.lastName;
     var emailId = req.body.emailId;
     var phone = req.body.phone;
+    
+    //need to figure out how to make profile pic name set to a string
     var profilePicName = req.files.profilePic.name;
     var profilePic = req.files.profilePic;
-
+    
     var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
     profilePic.mv(profilePicPath, function(err) { // move image to local folder
         console.log(err);
