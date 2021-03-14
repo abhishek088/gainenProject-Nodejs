@@ -77,10 +77,29 @@ app.post('/login', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
 
-    console.log(username);
-    console.log(password);
+    if(username === "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
+            console.log(err);
 
-    User.findOne({username: username, password: password}).exec(function(err, user){
+            if(user){
+                req.session.username = user.username;
+                req.session.userLoggedIn = true;
+                res.redirect('/adminprofile');
+            }
+            else{
+                res.render('login', {
+                    error: 'Incorrect username or password'
+                });
+            }
+            
+        });
+    }
+        
+    //console.log(username);
+    //console.log(password);
+
+    else if(username !== "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
             if(user){
@@ -95,6 +114,7 @@ app.post('/login', function(req, res){
             }
             
         });
+    }
 });
 
 //user profile get and post
@@ -209,7 +229,7 @@ app.post('/register', function(req, res){
                 console.log('new user saved');
             });
         
-            res.render('register', registerData);
+            res.redirect('/login');
         }
     });
     
@@ -322,8 +342,11 @@ app.post('/editProfile', function(req, res){
             user.phone = phone;
             user.profilePicName = profilePicName;
             user.save();  
- 
-            res.redirect('userprofile');
+            
+            if(req.session.username === "abhishekAdmin")   
+                res.redirect('adminprofile')
+            else
+                res.redirect('userprofile');
         });
         
     }
@@ -358,6 +381,49 @@ app.post('/deleteProfile', function(req, res){
             res.redirect('/');
         });
     }
+});
+
+//admin module---------------------------------------------------------------------------------------
+
+//user profile get and post
+app.get('/adminprofile', function(req, res){
+    if(req.session.userLoggedIn){
+        User.findOne({username: req.session.username}).exec(function(err, user){
+                console.log(err);
+                res.render('adminprofile', {
+                    username: user.username,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    emailId: user.firstName,
+                    phone: user.phone,
+                    profilePicName: user.profilePicName
+                });
+        });
+    }
+    else{
+        res.redirect('/login');
+    } 
+});
+
+app.post('/adminprofile', function(req, res){
+    res.render('adminprofile');
+}); //post method not needed till edit action is created
+
+//private ideas get and post
+app.get('/privateIdea', function(req, res){
+    if(req.session.userLoggedIn){
+        Idea.find({}).exec(function(err, ideas){
+            console.log(err)
+    
+            res.render('privateIdea', {ideas: ideas});
+        });
+    }
+    else
+        res.redirect('/login');
+});
+
+app.post('/privateIdea', function(req, res){
+    //dosomething
 });
 
 //listen to port

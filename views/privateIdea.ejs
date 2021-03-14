@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Edit Profile - Gainen</title>
+  <title>Gainen - Ideas Meet</title>
 </head>
 
 <body>
@@ -23,31 +23,23 @@
           <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
-    </nav>
-    <h2>Delete Profile</h2>
+  </nav>
+    <h2>Private Idea</h2>
   </header>
   
   <main>
+    <% ideas.reverse().forEach(function(ideas){ 
+          if(ideas.isPostOnPublic == false){
+    %>
+        <h3><%= ideas.username %></h3>
+        <h4><%= ideas.title %></h4>
+        <p><%= ideas.ideaDate %></p>
+        <p><%= ideas.idea %></p>
 
-  <form name="deleteProfile" action="" method="POST">
-
-    Are you sure you want to delete your profile, <%= username %>?<br>
-
-    This is an awesome platform to fund your ideas, but still if you would like to delete your profile 
-    we assure you that the following details would be deleted from our database:<br>
-
-    First Name: <%= firstName %><br>
-    Last Name: <%= lastName %><br>
-    Email Id: <%= emailId %><br>
-    Phone Number: <%= phone %><br>
-    Profile Pic:
-    <img src="/profile_pics/<%= profilePicName %>" alt="User Profile Pic" width="100" height="100">
-        
-    <button type="submit">Delete Profile</button>
-
-
-  </form>
-
+    <%
+          }
+        });
+    %>
   </main>
 </body>
 
