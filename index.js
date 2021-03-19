@@ -77,9 +77,11 @@ app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    console.log(username);
-    console.log(password);
+    if(username === "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
+            console.log(err);
 
+<<<<<<< HEAD
     User.findOne({ username: username, password: password }).exec(function (err, user) {
         console.log(err);
 
@@ -95,6 +97,42 @@ app.post('/login', function (req, res) {
         }
 
     });
+=======
+            if(user){
+                req.session.username = user.username;
+                req.session.userLoggedIn = true;
+                res.redirect('/adminprofile');
+            }
+            else{
+                res.render('login', {
+                    error: 'Incorrect username or password'
+                });
+            }
+            
+        });
+    }
+        
+    //console.log(username);
+    //console.log(password);
+
+    else if(username !== "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
+            console.log(err);
+
+            if(user){
+                req.session.username = user.username;
+                req.session.userLoggedIn = true;
+                res.redirect('/userprofile');
+            }
+            else{
+                res.render('login', {
+                    error: 'Incorrect username or password'
+                });
+            }
+            
+        });
+    }
+>>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
 });
 
 //user profile get and post
@@ -172,9 +210,11 @@ app.post('/register', function (req, res) {
     var lastName = req.body.lastName;
     var emailId = req.body.emailId;
     var phone = req.body.phone;
+    
+    //need to figure out how to make profile pic name set to a string
     var profilePicName = req.files.profilePic.name;
     var profilePic = req.files.profilePic;
-
+    
     var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
     profilePic.mv(profilePicPath, function (err) { // move image to local folder
         console.log(err);
@@ -206,8 +246,13 @@ app.post('/register', function (req, res) {
             newUser.save().then(function () {
                 console.log('new user saved');
             });
+<<<<<<< HEAD
 
             res.render('register', registerData);
+=======
+        
+            res.redirect('/login');
+>>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
         }
     });
 
@@ -319,9 +364,18 @@ app.post('/editProfile', function (req, res) {
             user.emailId = emailId;
             user.phone = phone;
             user.profilePicName = profilePicName;
+<<<<<<< HEAD
             user.save();
 
             res.redirect('userprofile');
+=======
+            user.save();  
+            
+            if(req.session.username === "abhishekAdmin")   
+                res.redirect('adminprofile')
+            else
+                res.redirect('userprofile');
+>>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
         });
 
     }
@@ -356,6 +410,49 @@ app.post('/deleteProfile', function (req, res) {
             res.redirect('/');
         });
     }
+});
+
+//admin module---------------------------------------------------------------------------------------
+
+//user profile get and post
+app.get('/adminprofile', function(req, res){
+    if(req.session.userLoggedIn){
+        User.findOne({username: req.session.username}).exec(function(err, user){
+                console.log(err);
+                res.render('adminprofile', {
+                    username: user.username,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    emailId: user.firstName,
+                    phone: user.phone,
+                    profilePicName: user.profilePicName
+                });
+        });
+    }
+    else{
+        res.redirect('/login');
+    } 
+});
+
+app.post('/adminprofile', function(req, res){
+    res.render('adminprofile');
+}); //post method not needed till edit action is created
+
+//private ideas get and post
+app.get('/privateIdea', function(req, res){
+    if(req.session.userLoggedIn){
+        Idea.find({}).exec(function(err, ideas){
+            console.log(err)
+    
+            res.render('privateIdea', {ideas: ideas});
+        });
+    }
+    else
+        res.redirect('/login');
+});
+
+app.post('/privateIdea', function(req, res){
+    //dosomething
 });
 
 //listen to port

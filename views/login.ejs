@@ -23,6 +23,7 @@
       </ul>
     </div>
   </header>
+<<<<<<< HEAD
   <main class="">
     <div class="login">
       <p>Login</p>
@@ -36,6 +37,29 @@
                 <input type="submit" value="Login" class="submit">
       </form>
     </div>
+=======
+  
+  <main>
+
+  <form name="login" action="" method="post">
+
+  <div class="container">
+    <label for="username"><b>username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required><br>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required><br>
+
+    <p id="errors" class="errors"></p>
+      <% if(typeof error !== 'undefined'){ %>
+              <%= error %>
+          <% } %><br>
+        
+    <button type="submit">Login</button>
+  </div>
+
+  </form>
+>>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
 
   </main>
   <footer>
