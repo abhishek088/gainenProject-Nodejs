@@ -81,23 +81,6 @@ app.post('/login', function (req, res) {
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
-<<<<<<< HEAD
-    User.findOne({ username: username, password: password }).exec(function (err, user) {
-        console.log(err);
-
-        if (user) {
-            req.session.username = user.username;
-            req.session.userLoggedIn = true;
-            res.redirect('/userprofile');
-        }
-        else {
-            res.render('login', {
-                error: 'Incorrect username or password'
-            });
-        }
-
-    });
-=======
             if(user){
                 req.session.username = user.username;
                 req.session.userLoggedIn = true;
@@ -132,7 +115,6 @@ app.post('/login', function (req, res) {
             
         });
     }
->>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
 });
 
 //user profile get and post
@@ -246,13 +228,8 @@ app.post('/register', function (req, res) {
             newUser.save().then(function () {
                 console.log('new user saved');
             });
-<<<<<<< HEAD
-
-            res.render('register', registerData);
-=======
         
             res.redirect('/login');
->>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
         }
     });
 
@@ -364,18 +341,12 @@ app.post('/editProfile', function (req, res) {
             user.emailId = emailId;
             user.phone = phone;
             user.profilePicName = profilePicName;
-<<<<<<< HEAD
-            user.save();
-
-            res.redirect('userprofile');
-=======
             user.save();  
             
             if(req.session.username === "abhishekAdmin")   
                 res.redirect('adminprofile')
             else
                 res.redirect('userprofile');
->>>>>>> 4b6a59db30a9cf2b87624212846c57d4cf11d3ea
         });
 
     }
