@@ -3,58 +3,48 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Register - Gainen</title>
+  <link rel="stylesheet" href="styles/register.css">
+  <title>Gainen - where ideas come to life</title>
 </head>
 
 <body>
   <header>
-    <%- include('layouts/navbar') -%>
-    <h2>Register New User</h2>
+    <div class="logo">
+      <h2 class="title">Gainen</h2>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="#">Browse</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </div>
   </header>
-  
-  <main>
-
-  <form name="register" action="" method="POST" enctype="multipart/form-data">
-
-  <div class="container">
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required><br>
-
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required><br>
-
-    <label for="firstName"><b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" name="firstName" required><br>
-
-    <label for="lastName"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter Last Name" name="lastName" required><br>
-
-    <label for="emailId"><b>Email Id</b></label>
-    <input type="text" placeholder="Enter Email Address" name="emailId" required><br>
-
-    <label for="phone"><b>Phone No.</b></label>
-    <input type="text" placeholder="Enter Phone Number" name="phone" required><br>
-
-    <label for="profilePic"><b>Profile Picture</b></label>
-    <input type="file" placeholder="Insert your picture" name="profilePic" id="profilePic" required><br>
-
-    <% if(typeof error !== 'undefined'){ %>
-      <%= error %>
-    <% } %>
-        
-    <button type="submit">Register</button>
-
-  </div>
-
-  </form>
+  <main class="">
+    <div class="register">
+      <p>Register</p>
+      <form method="POST" action="" class="registerForm" enctype="multipart/form-data">
+        <input type="text" name="username" id="username" placeholder="Username" autocomplete="off" required><br>
+        <input type="password" name="password" id="password" placeholder="Password" required><br>
+        <input type="text" name="firstName" id="firstName" placeholder="First Name" autocomplete="off" required><br>
+        <input type="text" name="lastName" id="lastName" placeholder="Last Name" autocomplete="off" required><br>
+        <input type="email" name="emailId" id="emailId" placeholder="Email Address" autocomplete="off" required><br>
+        <input type="text" name="phone" id="phone" placeholder="Phone" autocomplete="off" required><br>
+        <input class="profPicUpload" type="file" placeholder="Insert your picture" name="profilePic" id="profilePic" required><br>
+        <% if(typeof error !=='undefined' ){ %>
+          <%= error %>
+            <% } %>
+              <input type="submit" value="Submit" class="submit">
+      </form>
+    </div>
 
   </main>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
 </body>
-
-<%- include('layouts/footer') -%>
 
 </html>

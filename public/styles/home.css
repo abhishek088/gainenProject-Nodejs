@@ -1,0 +1,128 @@
+* {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+}
+
+html {
+     background: url("../images/bg.jpg") no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+}
+
+body {
+     width: 1400px;
+     margin: 15px auto;
+     font-family: 'Segoe UI', serif;
+}
+
+.header {
+     width: 1400px;
+}
+
+.logo {
+     width: 200px;
+     height: 60px;
+     float: left;
+     text-align: center;
+     color: #fff;
+}
+
+.title {
+     letter-spacing: 1px;
+     font-size: 26px;
+}
+
+.caption {
+     font-size: 10px;
+     letter-spacing: .8px;
+     font-weight: 600;
+}
+
+.navbar {
+     width: 800px;
+     height: 60px;
+     float: right;
+}
+
+.navbar ul {
+     float: right;
+     text-decoration: none;
+     margin-top: 15px;
+}
+
+.navbar ul li {
+     display: inline;
+}
+
+.navbar ul li a {
+     text-decoration: none;
+     color: #fff;
+     margin: 10px;
+     font-weight: 700;
+     padding-bottom: 5px;     
+}
+
+.navbar ul li a:active, a:hover {
+     border-bottom: 3px solid rgb(255, 255, 255);
+}
+
+/*
+* Main Section
+*/
+
+.left {
+     width: 700px;
+     float: left;
+     height: 600px;
+}
+
+.quote {
+     padding: 120px 0 30px 90px;
+     font-size: 40px;
+     font-weight: 500;
+     letter-spacing: -1px;
+     color: #fff;
+}
+
+.left a, .left a:hover, .left a:active, .left a:focus {
+     border: none;
+}
+
+.submitIdea {
+     width: 200px;
+     height: 60px;
+     margin-left: 90px;
+     font-family: 'Segoe UI', serif;
+     font-size: 22px;
+     cursor: pointer;
+     color: rgb(82, 82, 82);
+     font-weight: 700;
+     border-radius: 5px;
+     border: none;
+     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
+
+.submitIdea:hover {
+     color: #000;
+}
+
+.submitIdea:focus {
+     outline: none;
+}
+
+main {
+     width: 700px;
+     float: right;
+     height: 600px;
+}
+
+footer .footerText {
+     clear: both;
+     color: #fff;
+     text-align: center;
+     font-weight: 700;
+     font-size: 12px;
+}

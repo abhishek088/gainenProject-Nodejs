@@ -3,43 +3,44 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Gainen - Ideas Meet</title>
+  <link rel="stylesheet" href="styles/login.css">
+  <title>Gainen - where ideas come to life</title>
 </head>
 
 <body>
   <header>
-    <%- include('layouts/navbar') -%>
-    <h2>Login Form</h2>
+    <div class="logo">
+      <h2 class="title">Gainen</h2>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="#">Browse</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </div>
   </header>
-  
-  <main>
-
-  <form name="login" action="" method="post">
-
-  <div class="container">
-    <label for="username"><b>username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required><br>
-
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required><br>
-
-    <p id="errors" class="errors">
-      <% if(typeof error !== 'undefined'){ %>
-              <%= error %>
-          <% } %><br>
-        
-    <button type="submit">Login</button>
-  </div>
-
-  </form>
+  <main class="">
+    <div class="login">
+      <p>Login</p>
+      <form method="POST" action="" class="loginForm">
+        <input type="text" name="username" id="username" placeholder="Username"><br>
+        <input type="password" name="password" id="password" placeholder="Password"><br>
+        <p id="errors" class="errors">
+          <% if(typeof error !=='undefined' ){ %>
+            <%= error %>
+              <% } %><br>
+                <input type="submit" value="Login" class="submit">
+      </form>
+    </div>
 
   </main>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
 </body>
-
-<%- include('layouts/footer') -%>
 
 </html>

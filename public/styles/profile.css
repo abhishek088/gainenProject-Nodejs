@@ -1,0 +1,218 @@
+* {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+}
+
+html {
+     background: url("../images/bg_50.jpg") no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+}
+
+body {
+     width: 1400px;
+     margin: 15px auto;
+     font-family: 'Segoe UI', serif;
+}
+
+.header {
+     width: 1400px;
+}
+
+.logo {
+     width: 200px;
+     height: 60px;
+     float: left;
+     text-align: center;
+     color: #fff;
+}
+
+.title {
+     letter-spacing: 1px;
+     font-size: 26px;
+}
+
+.caption {
+     font-size: 10px;
+     letter-spacing: .8px;
+     font-weight: 600;
+}
+
+.navbar {
+     width: 800px;
+     height: 60px;
+     float: right;
+}
+
+.navbar ul {
+     float: right;
+     text-decoration: none;
+     margin-top: 15px;
+}
+
+.navbar ul li {
+     display: inline;
+}
+
+.navbar ul li a {
+     text-decoration: none;
+     color: #fff;
+     margin: 10px;
+     font-weight: 700;
+     padding-bottom: 5px;
+}
+
+.navbar ul li a:active, a:hover {
+     border-bottom: 3px solid rgb(255, 255, 255);
+}
+
+/*
+* Main Section
+*/
+
+.profileHeading {
+     color: #fff;
+     text-align: center;
+     clear: both;
+     font-size: 34px;
+     font-weight: 800;
+     letter-spacing: 1px;
+     padding-top: 20px;
+}
+
+.left {
+     width: 700px;
+     float: left;
+     height: 600px;
+}
+
+.labelTable {
+     margin: 60px 0 0 50px;
+}
+
+.labelTable td {
+     padding-bottom: 15px;
+}
+
+.labelTable label {
+     color: #fff;
+     font-weight: 600;
+     font-size: 20px;
+     padding-left: 30px;
+     letter-spacing: .5px;
+}
+
+.labelTable .edit-del-btn {
+     width: 120px;
+     height: 35px;
+     margin-left: 30px;
+     margin-top: 10px;
+     border-radius: 15px;
+     font-family: 'Segoe UI', serif;
+     font-size: 16px;
+     font-weight: 700;
+     outline: none;
+     border: none;
+     color: rgb(73, 73, 73);
+}
+
+.labelTable .edit-del-btn:hover {
+     color: #000;
+     background-color: rgb(199, 199, 199);
+     outline: none;
+     border: none;
+}
+.labelTable .edit-del-btn:focus {
+     outline: none;
+     border: none;
+}
+.left a, .left a:hover, .left a:active, .left a:focus {
+     border: none;
+}
+
+main {
+     width: 700px;
+     float: right;
+     height: 600px;
+     margin: auto;
+}
+
+.profileImg {
+     margin: 0 auto;
+}
+
+.profileImg img {
+     margin: 50px 0 20px 250px;
+}
+.displayIdea {
+     clear: both;
+     margin: auto;
+     padding-top: 50px;
+     margin-left: 100px;
+}
+
+.displayIdea .page-heading {
+     font-size: 35px;
+     font-weight: 700;
+     text-shadow: 2px 4px 4px rgba(94, 94, 94, 0.623);
+     color: #fff;
+     margin-bottom: 20px;
+     text-align: center;
+     letter-spacing: .5px;
+}
+
+.displayIdea .idea-container {
+     width: 1200px;
+     padding: 10px;
+     background-color: rgba(0, 0, 0, 0.521);
+     height: auto;
+     border-radius: 15px;
+     box-shadow: 0 4px 8px 0 rgba(32, 32, 32, 0.2), 0 6px 20px 0 rgba(39, 39, 39, 0.2);
+     margin-bottom: 20px;
+}
+
+.displayIdea h1, h3, p {
+     color: #fff;
+     font-family: 'Segoe UI', serif;
+     margin-left: 10px;
+     
+     padding: 5px;
+}
+
+.displayIdea .date-string {
+     font-size: 12px;
+}
+
+.displayIdea .idea-desc {
+     text-align: justify;
+     margin-right: 10px;
+     word-wrap: normal;
+}
+
+.displayIdea .like-button {
+     width: 80px;
+     height: 25px;
+     margin: 8px 0 10px 15px;
+     border-radius: 15px;
+     font-family: 'Segoe UI', serif;
+     font-size: 16px;
+     font-weight: 700;
+     color: rgb(56, 56, 56);
+     cursor: pointer;
+     outline: none;
+     border: none;
+}
+.displayIdea .like-button:hover {
+     color: #000;
+     background-color: rgb(189, 189, 189);
+}
+footer .footerText {
+     clear: both;
+     color: #fff;
+     text-align: center;
+     font-weight: 700;
+     font-size: 12px;
+}
