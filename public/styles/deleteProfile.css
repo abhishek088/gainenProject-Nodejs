@@ -5,7 +5,7 @@
 }
 
 html {
-     background: url("../images/bg_50.jpg") no-repeat center center fixed;
+     background: url("../images/bg.jpg") no-repeat center center fixed;
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -o-background-size: cover;
@@ -69,54 +69,52 @@ body {
      border-bottom: 3px solid rgb(255, 255, 255);
 }
 
-.register{
-     clear: both;
-     width: 600px;
+/*
+* Main Section
+*/
+
+.left {
+     width: 700px;
+     float: left;
      height: 600px;
-     margin: auto;
-     padding-top: 10px;
-     height: auto;
 }
-.register p {
-     font-size: 26px;
-     font-weight: 700;
+
+.delProfile {
+     margin-left: 20px;
+}
+
+.delProfile h1, p, label {
      color: #fff;
+}
+
+.delProfile h1 {
+     font-size: 35px;
      text-align: center;
-     margin-bottom: 10px;
+     margin: 20px;
 }
 
-.registerForm label {
-     color: #fff;
-     font-size: 20px;
-     font-weight: 700;
-     padding: 10px;
+.delProfile p, .delProfile .para {
+     font-size: 22px;
+     font-weight: 600;
+     word-wrap: normal;
+     text-align: justify;
 }
 
-.registerForm input{
-     margin: 10px 50px;
+.delProfile .para {
+     margin-bottom: 20px;
 }
 
-.registerForm input:not(input.submit) {
-     width: 300px;
-     height: 50px;
-     border-radius: 5px;
-     border: none;
-     padding: 10px;
-     font-size: 20px;
-     font-weight: 700;
+.delProfile label {
+     font-weight: 600;
+     letter-spacing: .5px;
 }
 
-.registerForm input:not(input.submit):focus {
-     outline: none;
+.delProfile img {
+     margin: 10px 0 0 10px;
 }
 
-.profPicUpload {
-     color: rgb(82, 82, 82);
-     font-weight: 700;
-}
-
-.registerForm input.submit {
-     width: 150px;
+.delProfile .del-btn {
+     width: 180px;
      height: 50px;
      border-radius: 5px;
      border: none;
@@ -125,15 +123,15 @@ body {
      font-weight: 700;
      cursor: pointer;
      color: rgb(82, 82, 82);
-     margin-left: 13px;
 }
 
-.registerForm input.submit:hover {
+.delProfile .del-btn:hover {
      color: #000;
 }
-
-.registerForm input.submit:focus {
-     outline: none;
+main {
+     width: 700px;
+     float: right;
+     height: 600px;
 }
 
 footer .footerText {
@@ -142,5 +140,4 @@ footer .footerText {
      text-align: center;
      font-weight: 700;
      font-size: 12px;
-     margin-top: 20px;
 }

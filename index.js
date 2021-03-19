@@ -427,5 +427,5 @@ app.post('/privateIdea', function(req, res){
 });
 
 //listen to port
-app.listen(8080);
-console.log(`server is running on port 8080`);
+app.listen(8000);
+console.log(`server is running on port 8000`);

@@ -3,54 +3,50 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Edit Profile - Gainen</title>
+  <link rel="stylesheet" href="styles/deleteProfile.css">
+  <title>Gainen - where ideas come to life</title>
 </head>
 
 <body>
   <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Gainen</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/postIdea">Create Idea</a></li>
-          <li><a href="/publicIdea">All Ideas</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-    <h2>Delete Profile</h2>
+    <div class="logo">
+      <h2 class="title">Gainen</h2>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="/postIdea">Create Idea</a></li>
+        <li><a href="/publicIdea">All Ideas</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
   </header>
-  
-  <main>
-
-  <form name="deleteProfile" action="" method="POST">
-
-    Are you sure you want to delete your profile, <%= username %>?<br>
-
-    This is an awesome platform to fund your ideas, but still if you would like to delete your profile 
-    we assure you that the following details would be deleted from our database:<br>
-
-    First Name: <%= firstName %><br>
-    Last Name: <%= lastName %><br>
-    Email Id: <%= emailId %><br>
-    Phone Number: <%= phone %><br>
-    Profile Pic:
-    <img src="/profile_pics/<%= profilePicName %>" alt="User Profile Pic" width="100" height="100">
+  <aside class="left">
+    <div class="delProfile">
+      <h1>Delete Profile</h1>
+      <p class="para">
+        This is an awesome platform to fund your ideas, but still if you would like to delete your profile we assure you that the following details would be deleted from our database:
+      </p>
+      <form class="delProfileForm" name="deleteProfile" action="" method="POST">
         
-    <button type="submit">Delete Profile</button>
-
-
-  </form>
-
-  </main>
+        <label>First Name: </label><label><%= firstName %></label><br>
+        <label>Last Name: </label><label><%= lastName %></label><br>
+        <label>Email Id: </label><label><%= emailId %></label><br>
+        <label>Phone Number: </label><label><%= phone %></label><br>
+        <label>Profile Pic: </label> 
+        <img src="/profile_pics/<%= profilePicName %>" alt="User Profile Pic" width="100" height="100"><br><br>  
+        <p>Are you sure you want to delete your profile, <%= username %>?</p><br>
+        <button class="del-btn" type="submit">Delete Profile</button>
+      </form>
+    </div>
+    
+  </aside>
+  <main></main>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
 </body>
-
-<%- include('layouts/footer') -%>
 
 </html>
