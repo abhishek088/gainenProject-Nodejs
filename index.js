@@ -127,7 +127,7 @@ app.get('/userprofile', function (req, res) {
                     username: user.username,
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    emailId: user.firstName,
+                    emailId: user.emailId,
                     phone: user.phone,
                     profilePicName: user.profilePicName,
                     ideas: ideas
@@ -307,7 +307,7 @@ app.get('/editProfile', function (req, res) {
                 password: user.password,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                emailId: user.firstName,
+                emailId: user.emailId,
                 phone: user.phone,
                 profilePicName: user.profilePicName
             });
@@ -326,6 +326,11 @@ app.post('/editProfile', function (req, res) {
     var phone = req.body.phone;
     var profilePicName = req.files.profilePic.name;
     var profilePic = req.files.profilePic;
+
+    // if (profilePicName == null)
+    //     profilePicName = "joinExplanation2";
+    // else   
+    // var profilePicName = req.files.profilePic.name
 
     var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
     profilePic.mv(profilePicPath, function (err) { // move image to local folder
@@ -364,7 +369,7 @@ app.get('/deleteProfile', function (req, res) {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                emailId: user.firstName,
+                emailId: user.emailId,
                 phone: user.phone,
                 profilePicName: user.profilePicName
             });
@@ -394,7 +399,7 @@ app.get('/adminprofile', function(req, res){
                     username: user.username,
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    emailId: user.firstName,
+                    emailId: user.emailId,
                     phone: user.phone,
                     profilePicName: user.profilePicName
                 });
