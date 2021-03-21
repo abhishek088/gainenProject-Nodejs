@@ -94,10 +94,6 @@ app.post('/login', function (req, res) {
             
         });
     }
-        
-    //console.log(username);
-    //console.log(password);
-
     else if(username !== "abhishekAdmin"){
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
@@ -111,8 +107,7 @@ app.post('/login', function (req, res) {
                 res.render('login', {
                     error: 'Incorrect username or password'
                 });
-            }
-            
+            }         
         });
     }
 });
@@ -160,24 +155,40 @@ app.post('/logout', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    console.log(username);
-    console.log(password);
+    if(username === "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
+            console.log(err);
 
-    User.findOne({ username: username, password: password }).exec(function (err, user) {
-        console.log(err);
+            if(user){
+                req.session.username = user.username;
+                req.session.userLoggedIn = true;
+                res.redirect('/adminprofile');
+            }
+            else{
+                res.render('login', {
+                    error: 'Incorrect username or password'
+                });
+            }
+            
+        });
+    }
+    else if(username !== "abhishekAdmin"){
+        User.findOne({username: username, password: password}).exec(function(err, user){
+            console.log(err);
 
-        if (user) {
-            req.session.username = user.username;
-            req.session.userLoggedIn = true;
-            res.redirect('/userprofile');
-        }
-        else {
-            res.render('login', {
-                error: 'Incorrect username or password'
-            });
-        }
-
-    });
+            if(user){
+                req.session.username = user.username;
+                req.session.userLoggedIn = true;
+                res.redirect('/userprofile');
+            }
+            else{
+                res.render('login', {
+                    error: 'Incorrect username or password'
+                });
+            }
+            
+        });
+    }
 });
 
 //register get and post
@@ -232,7 +243,6 @@ app.post('/register', function (req, res) {
             res.redirect('/login');
         }
     });
-
 });
 
 //post idea get  and post
@@ -428,6 +438,19 @@ app.get('/privateIdea', function(req, res){
 });
 
 app.post('/privateIdea', function(req, res){
+    //dosomething
+});
+
+//admin public idea get and post
+app.get('/adminPublicIdea', function (req, res) {
+    Idea.find({}).exec(function (err, ideas) {
+        console.log(err);
+
+        res.render('adminPublicIdea', { ideas: ideas });
+    });
+});
+
+app.post('/adminPublicIdea', function (req, res) {
     //dosomething
 });
 

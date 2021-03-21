@@ -17,9 +17,9 @@
     </div>
     <div class="navbar">
       <ul>
-        <li><a href="/postIdea">Create Idea</a></li>
-        <li><a href="/publicIdea">All Ideas</a></li>
-        <li><a href="/userprofile">My Profile</a></li>
+        <li><a href="/adminPublicIdea">All Ideas</a></li>
+        <li><a href="/privateIdea">Private Ideas</a></li>
+        <li><a href="/adminprofile">My Profile</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
@@ -43,7 +43,7 @@
           <p class="idea-desc">
             <%= ideas.idea %>
           </p>
-          <!-- <button class="like-button">Like it</button> -->
+          <button class="like-button" onclick="updateLikes()">Like it</button>
         </div>
         <%
           }
