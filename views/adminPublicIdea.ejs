@@ -32,7 +32,7 @@
         %>
         <div class="idea-container">
           <h3 class="user-name">
-            <%= ideas.username %>
+            <a href="mailto:abhishek@gmail.com?subject=Regarding%20idea&body=Lets%20meet%20at%202%3A00%20PM"><%= ideas.username %></a>           
           </h3>
           <h1 class="idea-title">
             <%= ideas.title %>
@@ -43,7 +43,22 @@
           <p class="idea-desc">
             <%= ideas.idea %>
           </p>
-          <button class="like-button" onclick="updateLikes()">Like it</button>
+          <!-- <button type="button" class="like-button" onclick="doLike();">Like it</button>
+          <span style="color: white;" id="likes"><%= ideas.likesCount %></span> -->
+          <%
+            if(ideas.adminLikeName.includes(adminName)){
+              %>
+              <button onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Unlike</button>
+              <%
+            }
+            else{
+              %>
+              <button onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Like</button>
+              <%
+            }
+          %>
+          
+          <span style="color: white;" id="likes-count-<%= ideas._id %>"><%= ideas.likesCount %></span>
         </div>
         <%
           }
@@ -54,6 +69,34 @@
   <footer>
     <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
   </footer>
-</body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      var updatePostStats = {
+          Like: function (postId) {
+              document.querySelector('#likes-count-' + postId).textContent++;
+          },
+          Unlike: function(postId) {
+              document.querySelector('#likes-count-' + postId).textContent--;
+          }
+      };
 
+      var toggleButtonText = {
+          Like: function(button) {
+              button.textContent = "Unlike";
+          },
+          Unlike: function(button) {
+              button.textContent = "Like";
+          }
+      };
+
+      var actOnPost = function (event) {
+          var postId = event.target.dataset.postId;
+          var action = event.target.textContent.trim();  
+          toggleButtonText[action](event.target);
+          updatePostStats[action](postId);
+          axios.post('/posts/' + postId + '/act', { action: action });
+      };
+  </script>
+
+</body>
 </html>

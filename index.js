@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+var cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
 
@@ -10,6 +11,8 @@ const path = require('path');
 
 //global variables
 const app = express();
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
 
@@ -51,7 +54,9 @@ const Idea = mongoose.model('Idea', {
     idea: String,
     username: String,
     isPostOnPublic: Boolean,
-    ideaDate: Date
+    ideaDate: Date,
+    likesCount: Number,
+    adminLikeName: Array
 });
 
 //for reference
@@ -77,7 +82,7 @@ app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if(username === "abhishekAdmin"){
+    if(username === "abhishekAdmin" || username === "steAdmin"){
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
@@ -94,7 +99,7 @@ app.post('/login', function (req, res) {
             
         });
     }
-    else if(username !== "abhishekAdmin"){
+    else if(username !== "abhishekAdmin" || username !== "steAdmin"){
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
@@ -155,7 +160,7 @@ app.post('/logout', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if(username === "abhishekAdmin"){
+    if(username === "abhishekAdmin" || username === "steAdmin"){
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
@@ -172,7 +177,7 @@ app.post('/logout', function (req, res) {
             
         });
     }
-    else if(username !== "abhishekAdmin"){
+    else if(username !== "abhishekAdmin" || username !== "steAdmin"){
         User.findOne({username: username, password: password}).exec(function(err, user){
             console.log(err);
 
@@ -358,7 +363,7 @@ app.post('/editProfile', function (req, res) {
             user.profilePicName = profilePicName;
             user.save();  
             
-            if(req.session.username === "abhishekAdmin")   
+            if(req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")   
                 res.redirect('adminprofile')
             else
                 res.redirect('userprofile');
@@ -443,17 +448,55 @@ app.post('/privateIdea', function(req, res){
 
 //admin public idea get and post
 app.get('/adminPublicIdea', function (req, res) {
-    Idea.find({}).exec(function (err, ideas) {
-        console.log(err);
+    if(req.session.userLoggedIn){
+        Idea.find({}).exec(function (err, ideas) {
+            console.log(err);
 
-        res.render('adminPublicIdea', { ideas: ideas });
-    });
+            res.render('adminPublicIdea', { 
+                ideas: ideas,
+                adminName: req.session.username
+             });
+        });
+    }
+    else
+        res.redirect('/login');
 });
 
 app.post('/adminPublicIdea', function (req, res) {
     //dosomething
 });
 
+//like post method
+app.post('/posts/:id/act', (req, res, next) => {
+    if(req.session.userLoggedIn){
+        const action = req.body.action;
+        // const counter = action === "Like" ? 1 : -1;
+        if(action === "Like"){
+            Idea.findByIdAndUpdate({_id: req.params.id}, {$inc: {likesCount: 1}}, {}, (err, numberAffected) => {
+                Idea.findOne({ _id: req.params.id }).exec(function(err, idea){
+                    idea.adminLikeName.push(req.session.username);
+                    idea.save(); 
+                    
+                });
+                res.send('');
+            });
+        }
+        if(action === "Unlike"){
+            Idea.findByIdAndUpdate({_id: req.params.id}, {$inc: {likesCount: -1}}, {}, (err, numberAffected) => {
+                Idea.findOne({ _id: req.params.id }).exec(function(err, idea){
+                    const index = idea.adminLikeName.indexOf(req.session.username);
+                    if (index > -1) {
+                        idea.adminLikeName.splice(index, 1);
+                    }
+                    idea.save();
+                });
+                res.send('');
+            });
+        }
+        
+    }
+});
+
 //listen to port
-app.listen(8000);
-console.log(`server is running on port 8000`);
+app.listen(8080);
+console.log(`server is running on port 8080`);
