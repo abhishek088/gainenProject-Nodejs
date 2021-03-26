@@ -497,6 +497,110 @@ app.post('/posts/:id/act', (req, res, next) => {
     }
 });
 
+//admin edit profile get and post
+app.get('/editProfileAdmin', function (req, res) {
+    if (req.session.userLoggedIn) {
+        User.findOne({ username: req.session.username }).exec(function (err, user) {
+            console.log(err)
+            res.render('editProfileAdmin', {
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.emailId,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/editProfileAdmin', function (req, res) {
+    var password = req.body.password;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var emailId = req.body.emailId;
+    var phone = req.body.phone;
+    var profilePicName = req.files.profilePic.name;
+    var profilePic = req.files.profilePic;
+
+    // if (profilePicName == null)
+    //     profilePicName = "joinExplanation2";
+    // else   
+    // var profilePicName = req.files.profilePic.name
+
+    var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
+    profilePic.mv(profilePicPath, function (err) { // move image to local folder
+        console.log(err);
+    });
+
+    if (req.session.userLoggedIn) {
+        User.findOne({ username: req.session.username }).exec(function (err, user) {
+            console.log(err)
+            user.password = password;
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.emailId = emailId;
+            user.phone = phone;
+            user.profilePicName = profilePicName;
+            user.save();
+
+            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")
+                res.redirect('adminprofile')
+            else
+                res.redirect('userprofile');
+        });
+
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+//admin delete profile get and post
+app.get('/deleteProfileAdmin', function (req, res) {
+    if (req.session.userLoggedIn) {
+        User.findOne({ username: req.session.username }).exec(function (err, user) {
+            console.log(err)
+            res.render('deleteProfileAdmin', {
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.emailId,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+app.post('/deleteProfileAdmin', function (req, res) {
+    if (req.session.userLoggedIn) {
+        User.findOneAndDelete({ username: req.session.username }).exec(function () {
+
+            res.redirect('/');
+        });
+    }
+});
+
+//shared------------------------------------------------------------------------------------------
+app.get('/userLoggedInHome', function (req, res) {
+    if (req.session.userLoggedIn) {
+        res.render('userLoggedInHome');
+    }
+});
+
+app.get('/adminLoggedInHome', function (req, res) {
+    if (req.session.userLoggedIn) {
+        res.render('adminLoggedInHome');
+    }
+});
+
 //listen to port
 app.listen(8000);
 console.log(`server is running on port 8000`);
