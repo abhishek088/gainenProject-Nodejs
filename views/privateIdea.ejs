@@ -3,47 +3,57 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Gainen - Ideas Meet</title>
+  <link rel="stylesheet" href="styles/publicIdea.css">
+  <title>Gainen - Private Ideas</title>
 </head>
 
 <body>
   <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Gainen</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/adminPublicIdea">All Ideas</a></li>
-          <li><a href="/privateIdea">Private Ideas</a></li>
-          <li><a href="/adminprofile">My Profile</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </div>
-  </nav>
-    <h2>Private Idea</h2>
+    <div class="logo">
+      <a href="/" class="title"><h2>Gainen</h2></a>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="/postIdea">Create Idea</a></li>
+        <li><a href="/publicIdea">All Ideas</a></li>
+        <li><a href="/userprofile">My Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
   </header>
-  
-  <main>
-    <% ideas.reverse().forEach(function(ideas){ 
-          if(ideas.isPostOnPublic == false){
-    %>
-        <h3><%= ideas.username %></h3>
-        <h4><%= ideas.title %></h4>
-        <p><%= ideas.ideaDate %></p>
-        <p><%= ideas.idea %></p>
-
-    <%
+  <main class="">
+    <div class="displayIdea">
+      <p class="page-heading">Private Ideas</p>
+        <% ideas.reverse().forEach(function(ideas){
+          if(ideas.isPostOnPublic==false){
+        %>
+        <div class="idea-container">
+          <h3 class="user-name">
+            <%= ideas.username %>
+          </h3>
+          <h1 class="idea-title">
+            <%= ideas.title %>
+          </h1>
+          <p class="date-string">
+            <%= ideas.ideaDate %>
+          </p>
+          <p class="idea-desc">
+            <%= ideas.idea %>
+          </p>
+          <!-- <button class="like-button">Like it</button> -->
+        </div>
+        <%
           }
         });
-    %>
+        %>
+    </div>
   </main>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
 </body>
-
-<%- include('layouts/footer') -%>
 
 </html>

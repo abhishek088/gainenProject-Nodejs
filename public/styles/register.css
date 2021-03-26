@@ -33,6 +33,8 @@ body {
 .title {
      letter-spacing: 1px;
      font-size: 26px;
+     text-decoration: none;
+     color: #fff;
 }
 
 .caption {

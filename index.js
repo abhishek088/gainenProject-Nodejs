@@ -82,46 +82,46 @@ app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if(username === "abhishekAdmin" || username === "steAdmin"){
-        User.findOne({username: username, password: password}).exec(function(err, user){
+    if (username === "abhishekAdmin" || username === "steAdmin") {
+        User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
-            if(user){
+            if (user) {
                 req.session.username = user.username;
                 req.session.userLoggedIn = true;
                 res.redirect('/adminprofile');
             }
-            else{
+            else {
                 res.render('login', {
                     error: 'Incorrect username or password'
                 });
             }
-            
+
         });
     }
-    else if(username !== "abhishekAdmin" || username !== "steAdmin"){
-        User.findOne({username: username, password: password}).exec(function(err, user){
+    else if (username !== "abhishekAdmin" || username !== "steAdmin") {
+        User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
-            if(user){
+            if (user) {
                 req.session.username = user.username;
                 req.session.userLoggedIn = true;
                 res.redirect('/userprofile');
             }
-            else{
+            else {
                 res.render('login', {
                     error: 'Incorrect username or password'
                 });
-            }         
+            }
         });
     }
 });
 
 //user profile get and post
 app.get('/userprofile', function (req, res) {
-    if(req.session.userLoggedIn){
-        User.findOne({username: req.session.username}).exec(function(err, user){
-            Idea.find({username: req.session.username}).exec(function(err, ideas){
+    if (req.session.userLoggedIn) {
+        User.findOne({ username: req.session.username }).exec(function (err, user) {
+            Idea.find({ username: req.session.username }).exec(function (err, ideas) {
                 console.log(err);
                 res.render('userprofile', {
                     username: user.username,
@@ -135,7 +135,7 @@ app.get('/userprofile', function (req, res) {
             });
         });
     }
-    else{
+    else {
         res.redirect('/login');
     }
 });
@@ -160,38 +160,38 @@ app.post('/logout', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if(username === "abhishekAdmin" || username === "steAdmin"){
-        User.findOne({username: username, password: password}).exec(function(err, user){
+    if (username === "abhishekAdmin" || username === "steAdmin") {
+        User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
-            if(user){
+            if (user) {
                 req.session.username = user.username;
                 req.session.userLoggedIn = true;
                 res.redirect('/adminprofile');
             }
-            else{
+            else {
                 res.render('login', {
                     error: 'Incorrect username or password'
                 });
             }
-            
+
         });
     }
-    else if(username !== "abhishekAdmin" || username !== "steAdmin"){
-        User.findOne({username: username, password: password}).exec(function(err, user){
+    else if (username !== "abhishekAdmin" || username !== "steAdmin") {
+        User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
-            if(user){
+            if (user) {
                 req.session.username = user.username;
                 req.session.userLoggedIn = true;
                 res.redirect('/userprofile');
             }
-            else{
+            else {
                 res.render('login', {
                     error: 'Incorrect username or password'
                 });
             }
-            
+
         });
     }
 });
@@ -208,11 +208,11 @@ app.post('/register', function (req, res) {
     var lastName = req.body.lastName;
     var emailId = req.body.emailId;
     var phone = req.body.phone;
-    
+
     //need to figure out how to make profile pic name set to a string
     var profilePicName = req.files.profilePic.name;
     var profilePic = req.files.profilePic;
-    
+
     var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
     profilePic.mv(profilePicPath, function (err) { // move image to local folder
         console.log(err);
@@ -242,10 +242,10 @@ app.post('/register', function (req, res) {
 
             //save user
             newUser.save().then(function () {
-                console.log('new user saved');
+                console.log('New User REGISTERED');
             });
-        
-            res.redirect('/login');
+
+            res.redirect('/userprofile');
         }
     });
 });
@@ -361,9 +361,9 @@ app.post('/editProfile', function (req, res) {
             user.emailId = emailId;
             user.phone = phone;
             user.profilePicName = profilePicName;
-            user.save();  
-            
-            if(req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")   
+            user.save();
+
+            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")
                 res.redirect('adminprofile')
             else
                 res.redirect('userprofile');
@@ -406,56 +406,56 @@ app.post('/deleteProfile', function (req, res) {
 //admin module---------------------------------------------------------------------------------------
 
 //user profile get and post
-app.get('/adminprofile', function(req, res){
-    if(req.session.userLoggedIn){
-        User.findOne({username: req.session.username}).exec(function(err, user){
-                console.log(err);
-                res.render('adminprofile', {
-                    username: user.username,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    emailId: user.emailId,
-                    phone: user.phone,
-                    profilePicName: user.profilePicName
-                });
+app.get('/adminprofile', function (req, res) {
+    if (req.session.userLoggedIn) {
+        User.findOne({ username: req.session.username }).exec(function (err, user) {
+            console.log(err);
+            res.render('adminprofile', {
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                emailId: user.emailId,
+                phone: user.phone,
+                profilePicName: user.profilePicName
+            });
         });
     }
-    else{
+    else {
         res.redirect('/login');
-    } 
+    }
 });
 
-app.post('/adminprofile', function(req, res){
+app.post('/adminprofile', function (req, res) {
     res.render('adminprofile');
 }); //post method not needed till edit action is created
 
 //private ideas get and post
-app.get('/privateIdea', function(req, res){
-    if(req.session.userLoggedIn){
-        Idea.find({}).exec(function(err, ideas){
+app.get('/privateIdea', function (req, res) {
+    if (req.session.userLoggedIn) {
+        Idea.find({}).exec(function (err, ideas) {
             console.log(err)
-    
-            res.render('privateIdea', {ideas: ideas});
+
+            res.render('privateIdea', { ideas: ideas });
         });
     }
     else
         res.redirect('/login');
 });
 
-app.post('/privateIdea', function(req, res){
+app.post('/privateIdea', function (req, res) {
     //dosomething
 });
 
 //admin public idea get and post
 app.get('/adminPublicIdea', function (req, res) {
-    if(req.session.userLoggedIn){
+    if (req.session.userLoggedIn) {
         Idea.find({}).exec(function (err, ideas) {
             console.log(err);
 
-            res.render('adminPublicIdea', { 
+            res.render('adminPublicIdea', {
                 ideas: ideas,
                 adminName: req.session.username
-             });
+            });
         });
     }
     else
@@ -468,22 +468,22 @@ app.post('/adminPublicIdea', function (req, res) {
 
 //like post method
 app.post('/posts/:id/act', (req, res, next) => {
-    if(req.session.userLoggedIn){
+    if (req.session.userLoggedIn) {
         const action = req.body.action;
         // const counter = action === "Like" ? 1 : -1;
-        if(action === "Like"){
-            Idea.findByIdAndUpdate({_id: req.params.id}, {$inc: {likesCount: 1}}, {}, (err, numberAffected) => {
-                Idea.findOne({ _id: req.params.id }).exec(function(err, idea){
+        if (action === "Like") {
+            Idea.findByIdAndUpdate({ _id: req.params.id }, { $inc: { likesCount: 1 } }, {}, (err, numberAffected) => {
+                Idea.findOne({ _id: req.params.id }).exec(function (err, idea) {
                     idea.adminLikeName.push(req.session.username);
-                    idea.save(); 
-                    
+                    idea.save();
+
                 });
                 res.send('');
             });
         }
-        if(action === "Unlike"){
-            Idea.findByIdAndUpdate({_id: req.params.id}, {$inc: {likesCount: -1}}, {}, (err, numberAffected) => {
-                Idea.findOne({ _id: req.params.id }).exec(function(err, idea){
+        if (action === "Unlike") {
+            Idea.findByIdAndUpdate({ _id: req.params.id }, { $inc: { likesCount: -1 } }, {}, (err, numberAffected) => {
+                Idea.findOne({ _id: req.params.id }).exec(function (err, idea) {
                     const index = idea.adminLikeName.indexOf(req.session.username);
                     if (index > -1) {
                         idea.adminLikeName.splice(index, 1);
@@ -493,10 +493,10 @@ app.post('/posts/:id/act', (req, res, next) => {
                 res.send('');
             });
         }
-        
+
     }
 });
 
 //listen to port
-app.listen(8080);
-console.log(`server is running on port 8080`);
+app.listen(8000);
+console.log(`server is running on port 8000`);
