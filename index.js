@@ -602,5 +602,5 @@ app.get('/adminLoggedInHome', function (req, res) {
 });
 
 //listen to port
-app.listen(8000);
+app.listen(8000 || process.env.PORT || parseInt(process.argv.pop()));
 console.log(`server is running on port 8000`);
