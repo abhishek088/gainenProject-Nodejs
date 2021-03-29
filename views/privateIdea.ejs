@@ -17,11 +17,11 @@
     </div>
     <div class="navbar">
       <ul>
-        <li><a href="/postIdea">Create Idea</a></li>
-        <li><a href="/publicIdea">All Ideas</a></li>
-        <li><a href="/userprofile">My Profile</a></li>
+        <li><a href="/adminPublicIdea">All Ideas</a></li>
+        <li><a href="/privateIdea">Private Ideas</a></li>
+        <li><a href="/adminprofile">My Profile</a></li>
         <li><a href="/logout">Logout</a></li>
-      </ul>
+      </ul> 
     </div>
   </header>
   <main class="">
@@ -32,7 +32,7 @@
         %>
         <div class="idea-container">
           <h3 class="user-name">
-            <%= ideas.username %>
+            <a href="mailto:<%= ideas.emailId %>?subject=GAINEN%20-%20We%20like%20your%20idea&body=Hi%20<%= ideas.username %>%2C%0D%0A%0D%0AThank%20you%20for%20posting%20the%20amazing%20idea%2C%20titled%20as%3A%20<%= ideas.title %>.%0D%0A%0D%0AWe%20really%20like%20your%20idea%20and%20the%20team%20has%20decided%20to%20move%20ahead%20and%20sponsor%20this%20idea%2C%20if%20our%20terms%20and%20conditions%20are%20met.%20To%20discuss%20everything%20in%20detail%2C%20I%20would%20like%20to%20meet%20you%20on%20a%20video%20call%20at%202%20PM%20on%2005%2F03%2F2021.%20The%20link%20for%20the%20zoom%20meeting%20is%20as%20follows%3A%0D%0A%0D%0A%0D%0ATo%20confirm%2C%20please%20reply%20to%20this%20email%20within%205%20days.%20If%20the%20meeting%20time%20needs%20to%20be%20re-scheduled%2C%20please%20write%20back%20with%20the%20time%20you%20would%20prefer.%20%0D%0A%0D%0AThank%20you.%0D%0A%0D%0ARegards%2C%0D%0AGainen%20Team%20"><%= ideas.username %></a>
           </h3>
           <h1 class="idea-title">
             <%= ideas.title %>

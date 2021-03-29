@@ -53,6 +53,7 @@ const Idea = mongoose.model('Idea', {
     title: String,
     idea: String,
     username: String,
+    emailId: String,
     isPostOnPublic: Boolean,
     ideaDate: Date,
     likesCount: Number,
@@ -277,6 +278,7 @@ app.post('/postIdea', function (req, res) {
                 title: title,
                 idea: idea,
                 username: user.username,
+                emailId: user.emailId,
                 isPostOnPublic: isPostOnPublic,
                 ideaDate: ideaDate
             }
@@ -399,6 +401,76 @@ app.post('/deleteProfile', function (req, res) {
         User.findOneAndDelete({ username: req.session.username }).exec(function () {
 
             res.redirect('/');
+        });
+    }
+});
+
+
+app.get('/deleteIdea/:id', function (req, res) {
+    if (req.session.userLoggedIn) {
+        var id = req.params.id;
+        console.log(id);
+        Idea.findOne({ _id: id }).exec(function (err, idea) {
+            console.log(err)
+            res.render('deleteIdea', {
+                title: idea.title,
+                idea: idea.idea,
+                ideaDate: idea.ideaDate,
+                username: idea.username
+            });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+app.post('/deleteIdea/:id', function(req, res) {
+    if(req.session.userLoggedIn) {
+        var id = req.params.id;
+        console.log(id);
+        Idea.findOneAndDelete({ _id: id }).exec(function() {
+            res.redirect('/userprofile');
+        });
+    }
+});
+
+app.get('/editIdea/:id', function (req, res) {
+    if (req.session.userLoggedIn) {
+        var id = req.params.id;
+        console.log(id);
+        Idea.findOne({ _id: id }).exec(function (err, idea) {
+            console.log(err)
+            res.render('editIdea', {
+                title: idea.title,
+                idea: idea.idea,
+                isPostOnPublic: idea.isPostOnPublic
+            });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+app.post('/editIdea/:id', function(req, res) {
+    if(req.session.userLoggedIn) {
+        var id = req.params.id;
+        var title = req.body.title;
+        var ideaEdit = req.body.idea;
+        var isPublic = req.body.isPublic;
+        console.log(id);
+        Idea.findOne({ _id: id }).exec(function(err, idea) {
+            if (isPublic == "public")
+                var isPostOnPublic = true;
+            else{
+                var isPostOnPublic = false;
+            }
+               
+            idea.title = title;
+            idea.idea = ideaEdit;
+            idea.isPostOnPublic = isPostOnPublic;
+            idea.save();
+
+            res.redirect('/userprofile');
         });
     }
 });
@@ -584,6 +656,34 @@ app.post('/deleteProfileAdmin', function (req, res) {
         User.findOneAndDelete({ username: req.session.username }).exec(function () {
 
             res.redirect('/');
+        });
+    }
+});
+
+app.get('/deleteIdeaAdmin/:id', function (req, res) {
+    if (req.session.userLoggedIn) {
+        var id = req.params.id;
+        console.log(id);
+        Idea.findOne({ _id: id }).exec(function (err, idea) {
+            console.log(err)
+            res.render('deleteIdeaAdmin', {
+                title: idea.title,
+                idea: idea.idea,
+                ideaDate: idea.ideaDate,
+                username: idea.username
+            });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+app.post('/deleteIdeaAdmin/:id', function(req, res) {
+    if(req.session.userLoggedIn) {
+        var id = req.params.id;
+        console.log(id);
+        Idea.findOneAndDelete({ _id: id }).exec(function() {
+            res.redirect('/adminprofile');
         });
     }
 });

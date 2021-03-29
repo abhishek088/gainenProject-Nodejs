@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/profile.css">
+  <title>Gainen - Delete Idea</title>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="/adminLoggedInHome" class="title">
+        <h2>Gainen</h2>
+      </a>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="/adminPublicIdea">All Ideas</a></li>
+        <li><a href="/privateIdea">Private Ideas</a></li>
+        <li><a href="/adminprofile">My Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+  <p class="profileHeading">Delete Idea</p>
+  
+  <aside class="left">
+    <div class="labelTable delProfile">
+      <p class="para">
+        Are you sure you want to delete this amazing idea permanently from Gainen?
+      </p>
+      <form method="POST" action="" class="delProfileForm" name="deleteProfile">
+        <table>
+          <tr>
+            <td><label for="title">Title: </label></td>
+            <td><label>
+                <%= title %>
+              </label></td>
+          </tr>
+          <tr>
+            <td><label for="idea">Idea: </label></td>
+            <td><label>
+                <%= idea %>
+              </label></td>
+          </tr>
+          <tr>
+            <td><label for="ideaDate">Idea Date: </label></td>
+            <td><label>
+                <%= ideaDate %>
+              </label></td>
+          </tr>
+        </table>
+        <button class="del-btn" type="submit">Delete</button>
+      </form>
+    </div>
+  </aside>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
