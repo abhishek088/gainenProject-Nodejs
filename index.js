@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 //setup db
-mongoose.connect('mongodb://localhost:27017/gainen', {
+mongoose.connect('mongodb+srv://abhishek088:gnihtoN@123@cluster0.loi55.mongodb.net/test', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
