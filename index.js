@@ -30,7 +30,8 @@ mongoose.connect('mongodb+srv://abhishek088:gnihtoN@123@cluster0.loi55.mongodb.n
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
+//mongodb+srv://abhishek088:gnihtoN@123@cluster0.loi55.mongodb.net/test
+//mongodb://localhost:27017/gainen
 //set up session
 app.use(session({
     secret: 'bfasdfbsaifdblsadsadfsbdfbuysfbasdfsf',
@@ -702,5 +703,5 @@ app.get('/adminLoggedInHome', function (req, res) {
 });
 
 //listen to port
-app.listen(8000 || process.env.PORT || parseInt(process.argv.pop()));
+app.listen(process.env.PORT, '0.0.0.0');
 console.log(`server is running on port 8000`);
