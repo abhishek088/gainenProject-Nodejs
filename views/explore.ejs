@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/publicIdea.css">
+  <title>Gainen - Explore Ideas</title>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="/home" class="title"><h2>Gainen</h2></a>
+      <p class="caption">where ideas come to life</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul> 
+    </div>
+  </header>
+  <main class="">
+    <div class="displayIdea">
+      <p class="page-heading">Explore</p>
+        <% ideas.reverse().forEach(function(ideas){
+            var numberOfAdmins = 3;
+            if(ideas.isPostOnPublic==true && ideas.likesCount == numberOfAdmins){
+        %>
+        <div class="idea-container">
+          <h3 class="user-name">
+            <%= ideas.username %>
+          </h3>
+          <h1 class="idea-title">
+            <%= ideas.title %>
+          </h1>
+          <p class="date-string">
+            <%= ideas.ideaDate %>
+          </p>
+          <p class="idea-desc">
+            <%= ideas.idea %>
+          </p>
+          <!-- <button class="like-button">Like it</button> -->
+        </div>
+        <%
+            }
+        });
+        %>
+    </div>
+  </main>
+  <footer>
+    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

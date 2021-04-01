@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 //setup db
-mongoose.connect('mongodb+srv://abhishek088:gnihtoN@123@cluster0.loi55.mongodb.net/test', {
+mongoose.connect('mongodb://localhost:27017/gainen', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -84,7 +84,7 @@ app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if (username === "abhishekAdmin" || username === "steAdmin") {
+    if (username === "abhishekAdmin" || username === "steAdmin" || username === "mereeshAdmin") {
         User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
@@ -101,7 +101,7 @@ app.post('/login', function (req, res) {
 
         });
     }
-    else if (username !== "abhishekAdmin" || username !== "steAdmin") {
+    else if (username !== "abhishekAdmin" || username !== "steAdmin" || username !== "mereeshAdmin") {
         User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
@@ -162,7 +162,7 @@ app.post('/logout', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    if (username === "abhishekAdmin" || username === "steAdmin") {
+    if (username === "abhishekAdmin" || username === "steAdmin" || username === "mereeshAdmin") {
         User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
@@ -179,7 +179,7 @@ app.post('/logout', function (req, res) {
 
         });
     }
-    else if (username !== "abhishekAdmin" || username !== "steAdmin") {
+    else if (username !== "abhishekAdmin" || username !== "steAdmin" || username !== "mereeshAdmin") {
         User.findOne({ username: username, password: password }).exec(function (err, user) {
             console.log(err);
 
@@ -366,7 +366,7 @@ app.post('/editProfile', function (req, res) {
             user.profilePicName = profilePicName;
             user.save();
 
-            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")
+            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin" || req.session.username === "mereeshAdmin")
                 res.redirect('adminprofile')
             else
                 res.redirect('userprofile');
@@ -621,7 +621,7 @@ app.post('/editProfileAdmin', function (req, res) {
             user.profilePicName = profilePicName;
             user.save();
 
-            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin")
+            if (req.session.username === "abhishekAdmin" || req.session.username === "steAdmin" || req.session.username === "mereeshAdmin")
                 res.redirect('adminprofile')
             else
                 res.redirect('userprofile');
@@ -702,6 +702,33 @@ app.get('/adminLoggedInHome', function (req, res) {
     }
 });
 
+app.get('/explore', function (req, res) {
+    Idea.find({}).exec(function (err, ideas) {
+        console.log(err)
+
+        res.render('explore', { ideas: ideas });
+    });
+});
+
+app.get('/userLoggedInExplore', function (req, res) {
+    if (req.session.userLoggedIn) {
+        Idea.find({}).exec(function (err, ideas) {
+            console.log(err)
+            res.render('userLoggedInExplore', { ideas: ideas });
+        });
+    }
+});
+
+app.get('/adminLoggedInExplore', function (req, res) {
+    if (req.session.userLoggedIn) {
+        Idea.find({}).exec(function (err, ideas) {
+            console.log(err)
+            res.render('adminLoggedInExplore', { ideas: ideas });
+        });
+    }
+});
+
 //listen to port
-app.listen(process.env.PORT, '0.0.0.0');
-console.log(`server is running on port 8000`);
+// app.listen(process.env.PORT, '0.0.0.0');
+app.listen(8080);
+console.log(`server is running on port 8080`);
