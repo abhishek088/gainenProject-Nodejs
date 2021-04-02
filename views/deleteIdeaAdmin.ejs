@@ -5,7 +5,302 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/profile.css">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: url("../images/bg_50.jpg") no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    body {
+      width: 1400px;
+      margin: 15px auto;
+      font-family: 'Segoe UI', serif;
+    }
+
+    /* header {
+    width: 100%;
+    margin-right: 200px;
+    position: fixed;
+    top: 0;
+} */
+
+    .header {
+      width: 1400px;
+    }
+
+    .logo {
+      width: 200px;
+      height: 60px;
+      float: left;
+      text-align: center;
+      color: #fff;
+    }
+
+    .title {
+      letter-spacing: 1px;
+      font-size: 26px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .caption {
+      font-size: 10px;
+      letter-spacing: .8px;
+      font-weight: 600;
+    }
+
+    .navbar {
+      width: 800px;
+      height: 60px;
+      float: right;
+    }
+
+    .navbar ul {
+      float: right;
+      text-decoration: none;
+      margin-top: 15px;
+    }
+
+    .navbar ul li {
+      display: inline;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      margin: 10px;
+      font-weight: 700;
+      padding-bottom: 5px;
+    }
+
+    .navbar ul li a:active,
+    a:hover {
+      border-bottom: 3px solid rgb(255, 255, 255);
+    }
+
+    /*
+* Main Section
+*/
+
+    .profileHeading {
+      color: #fff;
+      text-align: center;
+      clear: both;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding-top: 20px;
+    }
+
+    .left {
+      width: 700px;
+      float: left;
+      height: 600px;
+    }
+
+    .labelTable {
+      margin: 40px 0 0 50px;
+    }
+
+    .labelTable td {
+      padding-bottom: 15px;
+    }
+
+    .labelTable label {
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      padding-left: 30px;
+      letter-spacing: .5px;
+    }
+
+    .labelTable .edit-del-btn {
+      width: 120px;
+      height: 35px;
+      margin-left: 30px;
+      margin-top: 10px;
+      border-radius: 15px;
+      font-family: 'Segoe UI', serif;
+      font-size: 16px;
+      font-weight: 700;
+      outline: none;
+      border: none;
+      color: rgb(73, 73, 73);
+    }
+
+    .labelTable .edit-del-btn:hover {
+      color: #000;
+      background-color: rgb(199, 199, 199);
+      outline: none;
+      border: none;
+    }
+
+    .labelTable .edit-del-btn:focus {
+      outline: none;
+      border: none;
+    }
+
+    .left a,
+    .left a:hover,
+    .left a:active,
+    .left a:focus {
+      border: none;
+    }
+
+    main {
+      width: 700px;
+      float: right;
+      height: 600px;
+      margin: auto;
+    }
+
+    .profileImg {
+      margin: 0 auto;
+    }
+
+    .profileImg img {
+      margin: 50px 0 20px 250px;
+    }
+
+    .displayIdea {
+      clear: both;
+      margin: auto;
+      padding-top: 50px;
+      margin-left: 100px;
+    }
+
+    .displayIdea .page-heading {
+      font-size: 35px;
+      font-weight: 700;
+      text-shadow: 2px 4px 4px rgba(94, 94, 94, 0.623);
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .displayIdea .idea-container {
+      width: 1200px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.521);
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px 0 rgba(32, 32, 32, 0.2), 0 6px 20px 0 rgba(39, 39, 39, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .displayIdea h1,
+    h3,
+    p {
+      color: #fff;
+      font-family: 'Segoe UI', serif;
+      margin-left: 10px;
+
+      padding: 5px;
+    }
+
+    .displayIdea .date-string {
+      font-size: 12px;
+    }
+
+    .displayIdea .idea-desc {
+      text-align: justify;
+      margin-right: 10px;
+      word-wrap: normal;
+    }
+
+    .displayIdea .like-button {
+      width: 80px;
+      height: 25px;
+      margin: 8px 0 10px 15px;
+      border-radius: 15px;
+      font-family: 'Segoe UI', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgb(56, 56, 56);
+      cursor: pointer;
+      outline: none;
+      border: none;
+    }
+
+    .displayIdea .like-button:hover {
+      color: #000;
+      background-color: rgb(189, 189, 189);
+    }
+
+    .delProfile {
+      margin-left: 20px;
+    }
+
+    .delProfile h1,
+    p,
+    label {
+      color: #fff;
+    }
+
+    .delProfile h1 {
+      font-size: 35px;
+      text-align: center;
+      margin: 20px;
+    }
+
+    .delProfile p,
+    .delProfile .para {
+      font-size: 22px;
+      font-weight: 600;
+      word-wrap: normal;
+      text-align: justify;
+    }
+
+    .delProfile .para {
+      margin-bottom: 20px;
+    }
+
+    .delProfile label {
+      font-weight: 600;
+      letter-spacing: .5px;
+    }
+
+    .delProfile img {
+      margin: 10px 0 0 10px;
+    }
+
+    .delProfile .del-btn {
+      width: 180px;
+      height: 50px;
+      border-radius: 5px;
+      border: none;
+      font-size: 24px;
+      font-family: 'Poppins', serif;
+      font-weight: 700;
+      cursor: pointer;
+      color: rgb(82, 82, 82);
+      margin-left: 15px;
+    }
+
+    .delProfile .del-btn:hover {
+      color: #000;
+    }
+
+    footer .footerText {
+      clear: both;
+      color: #fff;
+      text-align: center;
+      font-weight: 700;
+      font-size: 12px;
+      margin-top: 50px;
+    }
+  </style>
   <title>Gainen - Delete Idea</title>
 </head>
 
@@ -27,8 +322,8 @@
     </div>
   </header>
   <p class="profileHeading">Delete Idea</p>
-  
-  <aside class="left">
+
+  <aside>
     <div class="labelTable delProfile">
       <p class="para">
         Are you sure you want to delete this amazing idea permanently from Gainen?
@@ -36,20 +331,20 @@
       <form method="POST" action="" class="delProfileForm" name="deleteProfile">
         <table>
           <tr>
-            <td><label for="title">Title: </label></td>
-            <td><label>
+            <td style="width: 150px;"><label for="title" style="margin-right: 20px; padding-left: 12px;">Title: </label></td>
+            <td><label style="text-align: justify; padding-left: 12px;">
                 <%= title %>
               </label></td>
           </tr>
           <tr>
-            <td><label for="idea">Idea: </label></td>
-            <td><label>
+            <td><p for="idea" style="margin-right: 20px; padding-left: 12px;">Idea: </p></td>
+            <td><p style="text-align: justify;">
                 <%= idea %>
-              </label></td>
+              </p></td>
           </tr>
           <tr>
-            <td><label for="ideaDate">Idea Date: </label></td>
-            <td><label>
+            <td><label for="ideaDate" style="margin-right: 20px; padding-left: 12px;">Idea Date: </label></td>
+            <td><label style="text-align: justify; padding-left: 12px;">
                 <%= ideaDate %>
               </label></td>
           </tr>

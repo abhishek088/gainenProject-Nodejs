@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="styles/profile.css">
   <title>Gainen - User Profile</title>
 </head>
@@ -84,8 +85,8 @@
         <p class="idea-desc">
           <%= ideas.idea %>
         </p>
-        <button><a href="/deleteIdea/<%= ideas._id %>">Delete</a></button>
-        <button><a href="/editIdea/<%= ideas._id %>">Edit</a></button>
+        <button class="del-idea-btn"><a href="/deleteIdea/<%= ideas._id %>">Delete</a></button>
+        <button class="edit-idea-btn"><a href="/editIdea/<%= ideas._id %>">Edit</a></button>
       </div>
       <%
       });

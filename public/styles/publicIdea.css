@@ -134,6 +134,16 @@ body {
      background-color: rgb(189, 189, 189);
 }
 
+.like-button a {
+     text-decoration: none;
+     color: #000;
+}
+
+.like-button a:hover {
+     border: none;
+     text-decoration: none;
+     color: #000;
+}
 footer .footerText {
      clear: both;
      color: #fff;

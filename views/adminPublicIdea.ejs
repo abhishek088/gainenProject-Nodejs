@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="styles/publicIdea.css">
   <title>Gainen - Public Ideas</title>
 </head>
@@ -48,18 +49,18 @@
           <%
             if(ideas.adminLikeName.includes(adminName)){
               %>
-              <button onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Unlike</button>
+              <button class="like-button" onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Unlike</button>
               <%
             }
             else{
               %>
-              <button onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Like</button>
+              <button class="like-button" onclick="actOnPost(event);" data-post-id="<%= ideas._id %>">Like</button>
               <%
             }
           %>
           
           <span style="color: white;" id="likes-count-<%= ideas._id %>"><%= ideas.likesCount %></span>
-          <button><a href="/deleteIdeaAdmin/<%= ideas._id %>">Delete</a></button>
+          <button class="like-button"><a href="/deleteIdeaAdmin/<%= ideas._id %>">Delete</a></button>
         </div>
         <%
           }

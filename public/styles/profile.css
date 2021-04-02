@@ -18,6 +18,13 @@ body {
      font-family: 'Segoe UI', serif;
 }
 
+/* header {
+     width: 100%;
+     margin-right: 200px;
+     position: fixed;
+     top: 0;
+} */
+
 .header {
      width: 1400px;
 }
@@ -210,6 +217,36 @@ main {
 .displayIdea .like-button:hover {
      color: #000;
      background-color: rgb(189, 189, 189);
+}
+
+.del-idea-btn, .edit-idea-btn {
+     width: 70px;
+     height: 20px;
+     border-radius: 15px;
+     border: none;
+     font-family: 'Segoe UI', sans-serif;
+     font-weight: 500;
+     color: #000;
+     cursor: pointer;
+}
+
+.del-idea-btn {
+     margin-left: 15px;
+}
+
+.del-idea-btn:hover, .edit-idea-btn:hover {
+     background-color: rgb(201, 201, 201);
+}
+
+.del-idea-btn a, .edit-idea-btn a {
+     text-decoration: none;
+     color: #000;
+}
+
+.del-idea-btn a:focus,  .edit-idea-btn a:focus, .del-idea-btn a:hover, .edit-idea-btn a:hover {
+     text-decoration: none;
+     color: #000;
+     border: none;
 }
 
 .delProfile {

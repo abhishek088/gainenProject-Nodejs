@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gainen - Edit Idea</title>
-  <style>
-      * {
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <title>Gainen - Edit Idea</title>
+    <style>
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -73,10 +74,11 @@
             color: #fff;
             margin: 10px;
             font-weight: 700;
-            padding-bottom: 5px;     
+            padding-bottom: 5px;
         }
 
-        .navbar ul li a:active, a:hover {
+        .navbar ul li a:active,
+        a:hover {
             border-bottom: 3px solid rgb(255, 255, 255);
         }
 
@@ -93,7 +95,7 @@
         .postIdea {
             color: #fff;
             margin-left: 50px;
-            
+
         }
 
         .postIdea p {
@@ -124,7 +126,7 @@
         textarea {
             width: 500px;
             max-height: 300px;
-            margin: 5px 10px 10px; 
+            margin: 5px 10px 10px;
             border-radius: 5px;
             border: none;
             padding: 10px;
@@ -178,62 +180,58 @@
             font-weight: 700;
             font-size: 12px;
         }
-  </style>
+    </style>
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <a href="/userLoggedInHome" class="title"><h2>Gainen</h2></a>
-      <p class="caption">where ideas come to life</p>
-    </div>
-    <div class="navbar">
-      <ul>
-        <li><a href="/postIdea">Create Idea</a></li>
-        <li><a href="/publicIdea">All Ideas</a></li>
-        <li><a href="/userprofile">My Profile</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-  </header>
-  <aside class="left">
-    <div class="postIdea">
+    <header>
+        <div class="logo">
+            <a href="/userLoggedInHome" class="title">
+                <h2>Gainen</h2>
+            </a>
+            <p class="caption">where ideas come to life</p>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="/postIdea">Create Idea</a></li>
+                <li><a href="/publicIdea">All Ideas</a></li>
+                <li><a href="/userprofile">My Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+    </header>
+    <aside class="left">
+        <div class="postIdea">
 
-      <p>Edit Idea</p>
+            <p>Edit Idea</p>
 
-      <form method="POST" action="" class="submitIdeaForm">
-        <input type="text" name="title" id="title" value="<%= title %>" placeholder="Title"><br>
+            <form method="POST" action="" class="submitIdeaForm">
+                <input type="text" name="title" id="title" value="<%= title %>" placeholder="Title"><br>
 
-        <textarea name="idea" id="idea" cols="30" rows="10"
-          placeholder="Provide a brief description of your idea..."><%= idea %></textarea><br>
-        
-        <% 
-        if (isPostOnPublic === true){
-         %>
-            <input type="radio" name="isPublic" id="public" value="public" checked>
-            <label for="public"><b>Public</b></label><br>
+                <textarea name="idea" id="idea" cols="30" rows="10"
+                    placeholder="Provide a brief description of your idea..."><%= idea %></textarea><br>
 
-            <input type="radio" name="isPublic" id="private" value="private">
-            <label for="private"><b>Private</b></label><br>
-        <% 
-        } else {
-        %>
-            <input type="radio" name="isPublic" id="public" value="public">
-            <label for="public"><b>Public</b></label><br>
+                <% if (isPostOnPublic===true){ %>
+                    <input type="radio" name="isPublic" id="public" value="public" checked>
+                    <label for="public"><b>Public</b></label><br>
 
-            <input type="radio" name="isPublic" id="private" value="private" checked>
-            <label for="private"><b>Private</b></label><br>
-            <%
-        }
-        %>
+                    <input type="radio" name="isPublic" id="private" value="private">
+                    <label for="private"><b>Private</b></label><br>
+                    <% } else { %>
+                        <input type="radio" name="isPublic" id="public" value="public">
+                        <label for="public"><b>Public</b></label><br>
 
-        <button type="submit" value="Submit" class="submitIdea">Submit</button>
-      </form>
-    </div>
-  </aside>
-  <main></main>
-  <footer>
-    <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
-  </footer>
+                        <input type="radio" name="isPublic" id="private" value="private" checked>
+                        <label for="private"><b>Private</b></label><br>
+                        <% } %>
+
+                            <button type="submit" value="Submit" class="submitIdea">Submit</button>
+            </form>
+        </div>
+    </aside>
+    <main></main>
+    <footer>
+        <p class="footerText">&copy; 2021 Gainen. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
