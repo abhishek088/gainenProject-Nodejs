@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 //setup db
-mongoose.connect('mongodb+srv://abhishek088:gnihtoN@123@cluster0.loi55.mongodb.net/test', {
+mongoose.connect('mongodb://localhost:27017/gainen', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -58,7 +58,8 @@ const Idea = mongoose.model('Idea', {
     isPostOnPublic: Boolean,
     ideaDate: Date,
     likesCount: Number,
-    adminLikeName: Array
+    adminLikeName: Array,
+    category: String
 });
 
 //for reference
@@ -265,6 +266,7 @@ app.post('/postIdea', function (req, res) {
     var idea = req.body.idea;
     var isPublic = req.body.isPublic;
     var ideaDate = Date.now();
+    var category = req.body.category;
 
     if (req.session.userLoggedIn) {
         User.findOne({ username: req.session.username }).exec(function (err, user) {
@@ -281,7 +283,8 @@ app.post('/postIdea', function (req, res) {
                 username: user.username,
                 emailId: user.emailId,
                 isPostOnPublic: isPostOnPublic,
-                ideaDate: ideaDate
+                ideaDate: ideaDate,
+                category: category
             }
 
             //store user
@@ -689,6 +692,19 @@ app.post('/deleteIdeaAdmin/:id', function(req, res) {
     }
 });
 
+app.post('/sortIdea', function(req, res){
+    if (req.session.userLoggedIn) {
+        var sorting = req.body.sorting;
+        Idea.find({}).exec(function (err, ideas) {
+            console.log(err)
+
+            res.render('sortIdea', { ideas: ideas, sorting: sorting });
+        });
+    }
+    else
+        res.redirect('/login');
+})
+
 //shared------------------------------------------------------------------------------------------
 app.get('/userLoggedInHome', function (req, res) {
     if (req.session.userLoggedIn) {
@@ -729,6 +745,6 @@ app.get('/adminLoggedInExplore', function (req, res) {
 });
 
 //listen to port
-app.listen(process.env.PORT, '0.0.0.0');
-//app.listen(8000);
+//app.listen(process.env.PORT, '0.0.0.0');
+app.listen(8000);
 console.log(`server is running on port 8000`);
