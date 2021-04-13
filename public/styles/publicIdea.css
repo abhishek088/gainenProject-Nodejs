@@ -71,11 +71,13 @@ body {
      border-bottom: 3px solid rgb(255, 255, 255);
 }
 
+
+
 .displayIdea {
      clear: both;
      margin: auto;
      padding-top: 50px;
-     margin-left: 100px;
+     box-sizing: border-box;
 }
 
 .displayIdea .page-heading {
@@ -88,7 +90,55 @@ body {
      letter-spacing: .5px;
 }
 
+.category {
+     height: 50px;
+     margin-left: 450px;
+     margin-top: 50px;
+}
+
+.sortCategoryForm label {
+     color: #fff;
+     font-size: 20px;
+     font-weight: 600;
+     vertical-align: middle;
+}
+
+.sortCategoryForm select {
+     width: 200px;
+     height: 35px;
+     border: none;
+     outline: none;
+     border-radius: 25px;
+     padding-left: 10px;
+     font-size: 16px;
+     font-weight: 600;
+     font-family: 'Segoe UI', sans-serif;
+     cursor: pointer;
+     vertical-align: middle;
+}
+
+.sortCategoryForm button {
+     width: 80px;
+     height: 35px;
+     border: none;
+     outline: none;
+     border-radius: 25px;
+     font-size: 18px;
+     font-weight: 600;
+     font-family: 'Segoe UI', sans-serif;
+     padding: 0;
+     margin-left: 10px;
+     vertical-align: middle;
+     cursor: pointer;
+}
+
+.sortCategoryForm button:hover {
+     color: #000;
+     background-color: rgb(189, 189, 189);
+}
+
 .displayIdea .idea-container {
+     margin-left: 100px;
      width: 1200px;
      padding: 10px;
      background-color: rgba(0, 0, 0, 0.521);

@@ -28,18 +28,20 @@
   <main class="">
     <div class="displayIdea">
       <p class="page-heading">Public Ideas</p>
-      <form method="POST" action="/sortIdea" class="sortCategoryForm">
-
-        <label for="sorting">Choose a category</label>
-        <select name="sorting" id="sorting">
-          <option value="all">All</option>
-          <option value="agriculture">Agriculture</option>
-          <option value="business">Business</option>
-          <option value="it">IT</option>
-          <option value="medical">Medical</option>
-        </select>
+      <div class="category">
+        <form method="POST" action="/sortIdea" class="sortCategoryForm">
   
-        <button type="submit" value="Submit" class="submitIdea">Sort</button>
+          <label for="sorting">Choose a category: </label>
+          <select name="sorting" id="sorting">
+            <option value="all">All</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="business">Business</option>
+            <option value="it">IT</option>
+            <option value="medical">Medical</option>
+          </select>
+    
+          <button type="submit" value="Submit" class="submitIdea">Sort</button>
+      </div>
       </form>
         <% ideas.reverse().forEach(function(ideas){
           if(ideas.isPostOnPublic==true){
