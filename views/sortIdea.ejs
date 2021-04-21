@@ -27,10 +27,10 @@
   </header>
   <main class="">
     <div class="displayIdea">
-      <p class="page-heading">Public Ideas</p>
+      <p class="page-heading"><%= sorting.charAt(0).toUpperCase() + sorting.slice(1) %> Ideas</p>
       <form method="POST" action="/sortIdea" class="sortCategoryForm">
 
-        <label for="sorting">Choose a category</label>
+        <label class="sort" for="sorting">Choose a category:</label>
         <select name="sorting" id="sorting">
           <option value="all">All</option>
           <option value="agriculture">Agriculture</option>

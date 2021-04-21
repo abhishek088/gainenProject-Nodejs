@@ -59,6 +59,10 @@ body {
      display: inline;
 }
 
+.sort{
+     padding-left: 480px;
+}
+
 .navbar ul li a {
      text-decoration: none;
      color: #fff;

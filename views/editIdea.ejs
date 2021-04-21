@@ -200,6 +200,7 @@
             </ul>
     </header>
     <aside class="left">
+        
         <div class="postIdea">
 
             <p>Edit Idea</p>
@@ -223,6 +224,55 @@
                         <input type="radio" name="isPublic" id="private" value="private" checked>
                         <label for="private"><b>Private</b></label><br>
                         <% } %>
+
+                        <% if (category === "agriculture"){
+                            %>
+                            <label for="category">Choose a category</label>
+
+                            <select name="category" id="category">
+                                <option selected="selected" value="agriculture">Agriculture</option>
+                                <option value="business">Business</option>
+                                <option value="it">IT</option>
+                                <option value="medical">Medical</option>
+                            </select>
+                            <%
+
+                            }else if(category === "business"){
+                                %>
+                                <label for="category">Choose a category</label>
+
+                                <select name="category" id="category">
+                                    <option  value="agriculture">Agriculture</option>
+                                    <option selected="selected" value="business">Business</option>
+                                    <option value="it">IT</option>
+                                    <option value="medical">Medical</option>
+                                </select>
+                                <%
+                                } else if(category === "it"){
+                                    %>
+                                    <label for="category">Choose a category</label>
+    
+                                    <select name="category" id="category">
+                                        <option  value="agriculture">Agriculture</option>
+                                        <option  value="business">Business</option>
+                                        <option selected="selected" value="it">IT</option>
+                                        <option value="medical">Medical</option>
+                                    </select>
+                                    <%
+                                } else if(category === "medical"){
+                                    %>
+                                    <label for="category">Choose a category</label>
+    
+                                    <select name="category" id="category">
+                                        <option  value="agriculture">Agriculture</option>
+                                        <option  value="business">Business</option>
+                                        <option value="it">IT</option>
+                                        <option selected="selected" value="medical">Medical</option>
+                                    </select>
+                                    <%
+                            }
+                        %>
+                        
 
                             <button type="submit" value="Submit" class="submitIdea">Submit</button>
             </form>

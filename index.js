@@ -5,6 +5,8 @@ const session = require('express-session');
 const fileUpload = require('express-fileupload');
 var cookieParser = require('cookie-parser');
 
+const { check, validationResult } = require('express-validator');
+
 const mongoose = require('mongoose');
 
 const path = require('path');
@@ -204,53 +206,69 @@ app.get('/register', function (req, res) {
     res.render('register');
 });
 
-app.post('/register', function (req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var emailId = req.body.emailId;
-    var phone = req.body.phone;
+app.post('/register', [
+    check('username', 'Please enter an username').notEmpty(),
+    check('password', 'Please enter a password').notEmpty(),
+    check('firstName', 'Please enter your first Name').notEmpty(),
+    check('lastName', 'Please enter your last Name').notEmpty(),
+    check('emailId', 'Please enter your email address').notEmpty(),
+    check('phone', 'Please enter your phone number').notEmpty(),
+],
+function (req, res) {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        res.render('register',{
+            errors: errors.array()
+        })
+    }
+    else{
+        var username = req.body.username;
+        var password = req.body.password;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var emailId = req.body.emailId;
+        var phone = req.body.phone;
 
-    //need to figure out how to make profile pic name set to a string
-    var profilePicName = req.files.profilePic.name;
-    var profilePic = req.files.profilePic;
+        //need to figure out how to make profile pic name set to a string
+        var profilePicName = req.files.profilePic.name;
+        var profilePic = req.files.profilePic;
 
-    var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
-    profilePic.mv(profilePicPath, function (err) { // move image to local folder
-        console.log(err);
-    });
+        var profilePicPath = 'public/profile_pics/' + profilePicName; // create local storage path
+        profilePic.mv(profilePicPath, function (err) { // move image to local folder
+            console.log(err);
+        });
 
-    User.findOne({ username: username }).exec(function (err, user) {
-        console.log(err);
+        User.findOne({ username: username }).exec(function (err, user) {
+            console.log(err);
 
-        if (user) {
-            res.render('register', {
-                error: 'Username already exists. Please use a different username'
-            });
-        }
-        else {
-            var registerData = {
-                username: username,
-                password: password,
-                firstName: firstName,
-                lastName: lastName,
-                emailId: emailId,
-                phone: phone,
-                profilePicName: profilePicName
+            if (user) {
+                res.render('register', {
+                    error: 'Username already exists. Please use a different username'
+                });
             }
+            else {
+                var registerData = {
+                    username: username,
+                    password: password,
+                    firstName: firstName,
+                    lastName: lastName,
+                    emailId: emailId,
+                    phone: phone,
+                    profilePicName: profilePicName
+                }
 
-            //store user
-            var newUser = new User(registerData);
+                //store user
+                var newUser = new User(registerData);
 
-            //save user
-            newUser.save().then(function () {
-                console.log('New User REGISTERED');
-            });
+                //save user
+                newUser.save().then(function () {
+                    console.log('New User REGISTERED');
+                });
 
-            res.redirect('/userprofile');
-        }
-    });
+                res.redirect('/userprofile');
+            }
+        });
+    }
 });
 
 //post idea get  and post
@@ -447,7 +465,8 @@ app.get('/editIdea/:id', function (req, res) {
             res.render('editIdea', {
                 title: idea.title,
                 idea: idea.idea,
-                isPostOnPublic: idea.isPostOnPublic
+                isPostOnPublic: idea.isPostOnPublic,
+                category: idea.category
             });
         });
     }
@@ -461,6 +480,7 @@ app.post('/editIdea/:id', function(req, res) {
         var title = req.body.title;
         var ideaEdit = req.body.idea;
         var isPublic = req.body.isPublic;
+        var category = req.body.category;
         console.log(id);
         Idea.findOne({ _id: id }).exec(function(err, idea) {
             if (isPublic == "public")
@@ -472,6 +492,7 @@ app.post('/editIdea/:id', function(req, res) {
             idea.title = title;
             idea.idea = ideaEdit;
             idea.isPostOnPublic = isPostOnPublic;
+            idea.category = category;
             idea.save();
 
             res.redirect('/userprofile');

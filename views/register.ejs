@@ -38,6 +38,15 @@
         <% if(typeof error !=='undefined' ){ %>
           <%= error %>
             <% } %>
+            <%
+                if(typeof(errors) != 'undefined'){
+                    for(var error of errors){
+                        %>
+                        <p id="errors"><%= error.msg %></p>
+                        <%
+                    }
+                }
+            %>
               <input type="submit" value="Submit" class="submit">
       </form>
     </div>
